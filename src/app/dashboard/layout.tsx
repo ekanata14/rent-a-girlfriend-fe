@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,20 +17,14 @@ export const metadata: Metadata = {
   description: "Rent A Girlfriend Application",
 };
 
-export default function RootLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="h-screen w-screen flex justify-center items-center">
-          {children}
-        </div>
-      </body>
-    </html>
+    <section>
+      {children}
+    </section>
   );
 }
