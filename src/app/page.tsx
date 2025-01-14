@@ -7,13 +7,14 @@ import Gf_1 from "@/../public/images/gf-1.png";
 import Gf_2 from "@/../public/images/gf-2.png";
 import Gf_3 from "@/../public/images/gf-3.jpeg";
 import Gf_4 from "@/../public/images/gf-4.png";
+import MsBreew from "@/../public/images/msbreew.jpg";
 
 export default function Home() {
   return (
     <>
       <section
-        className="h-screen w-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${HeroImage.src})` }}
+        className="h-screen w-screen bg-fill bg-center"
+        style={{ backgroundImage: `url(${MsBreew.src})` }}
       >
         <div className="absolute h-screen w-screen z-10 bg-gradient-to-r from-pink to-blue-700 opacity-75"></div>
         <header className="relative z-20 container flex justify-between items-center mx-auto h-[100px] px-4 md:px-0">
@@ -155,8 +156,8 @@ export default function Home() {
       </section>
 
       <section
-        className="h-[600px] w-screen bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${HeroImage.src})` }}
+        className="h-[600px] w-screen bg-fill bg-center relative"
+        style={{ backgroundImage: `url(${MsBreew.src})` }}
       >
         <div className="absolute h-full w-screen z-10 bg-gradient-to-r from-pink to-blue-700 opacity-75"></div>
         <div className="h-full w-screen flex flex-col justify-center items-center gap-8">
