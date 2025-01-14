@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // image
 import HeroImage from "@/../public/images/hero-background.png";
@@ -23,7 +24,9 @@ export default function Home() {
           </h2>
           <div className="space-x-4">
             <Button variant={"pink"}>Register</Button>
-            <Button variant={"outlinePink"}>Login</Button>
+            <Link href="/login">
+              <Button variant={"outlinePink"}>Login</Button>
+            </Link>
           </div>
         </header>
         <div className="container mx-auto relative z-20 flex flex-col gap-8 items-center justify-center px-4 md:px-0 text-center h-full">
