@@ -16,9 +16,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+// Define validation schema
 const FormSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
+  }),
+  password: z.string().min(8, {
+    message: "Password must be at least 8 characters.",
   }),
 });
 
@@ -27,18 +31,12 @@ export function LoginForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",
+      password: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
+    console.log("Login form submitted successfully:", data);
   }
 
   return (
@@ -49,37 +47,44 @@ export function LoginForm() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-6 text-white"
           >
+            {/* Username Field */}
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  {/* <FormLabel>Username</FormLabel> */}
                   <FormControl>
                     <Input placeholder="Username" {...field} className="text-white" />
                   </FormControl>
-                  <FormDescription className="text-white">
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {/* Password Field */}
             <FormField
               control={form.control}
-              name="username"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
-                    <Input placeholder="Password" {...field} className="text-white" />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      {...field}
+                      className="text-white"
+                    />
                   </FormControl>
-                  <FormDescription className="text-white">
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+
+            <Button type="submit" variant={"outlinePink"}>
+              Login
+            </Button>
           </form>
         </Form>
       </div>
