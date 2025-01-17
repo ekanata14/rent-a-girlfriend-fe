@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -55,7 +56,11 @@ export function LoginForm() {
                 <FormItem>
                   {/* <FormLabel>Username</FormLabel> */}
                   <FormControl>
-                    <Input placeholder="Username" {...field} className="text-white" />
+                    <Input
+                      placeholder="Username"
+                      {...field}
+                      className="text-white"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,10 +86,11 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-
-            <Button type="submit" variant={"outlinePink"}>
-              Login
-            </Button>
+            <Link href="/dashboard-admin">
+              <Button type="submit" variant={"outlinePink"}>
+                Login
+              </Button>
+            </Link>
           </form>
         </Form>
       </div>

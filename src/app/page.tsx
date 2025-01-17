@@ -23,7 +23,10 @@ export default function Home() {
             Rent a Girlfriend
           </h2>
           <div className="space-x-4">
-            <Button variant={"pink"}>Register</Button>
+            <Link href="/register">
+              <Button variant={"pink"}>Register</Button>
+            </Link>
+
             <Link href="/login">
               <Button variant={"outlinePink"}>Login</Button>
             </Link>

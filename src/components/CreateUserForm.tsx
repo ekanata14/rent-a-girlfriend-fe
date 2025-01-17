@@ -42,7 +42,7 @@ const FormSchema = z.object({
     .max(32, { message: "Password must be less than 32 characters." }),
 });
 
-export function RegisterForm() {
+export function CreateUserForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -62,23 +62,22 @@ export function RegisterForm() {
 
   return (
     <>
-      <div className="w-full max-w-xl bg-pink p-8 rounded-xl shadow-lg">
+      <div className="w-full max-w-xl bg-transparent px-8 rounded-xl">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 text-white"
+            className="w-full space-y-6 text-black"
           >
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Username</FormLabel> */}
+                  <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Username"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -90,12 +89,11 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Email</FormLabel> */}
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Email"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -107,13 +105,12 @@ export function RegisterForm() {
               name="age"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Age</FormLabel> */}
+                  <FormLabel>Age</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
                       placeholder="Age"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -125,13 +122,12 @@ export function RegisterForm() {
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Age</FormLabel> */}
+                  <FormLabel>Gender</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
                       placeholder="Text"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -143,13 +139,12 @@ export function RegisterForm() {
               name="height"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Height (cm)</FormLabel> */}
+                  <FormLabel>Height (cm)</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
                       placeholder="Height"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -161,13 +156,12 @@ export function RegisterForm() {
               name="mobile_phone"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Mobile Phone</FormLabel> */}
+                  <FormLabel>Mobile Phone</FormLabel>
                   <FormControl>
                     <Input
-                      type="tel"
+                      type="number"
                       placeholder="Mobile Phone"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -179,13 +173,12 @@ export function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Password</FormLabel> */}
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="Password"
                       {...field}
-                      className="text-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -193,8 +186,8 @@ export function RegisterForm() {
               )}
             />
             <Link href="/dashboard-admin">
-              <Button type="submit" variant={"outlinePink"}>
-                Register
+              <Button type="submit">
+                Save
               </Button>
             </Link>
           </form>
