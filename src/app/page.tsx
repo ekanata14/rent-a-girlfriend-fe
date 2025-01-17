@@ -19,28 +19,28 @@ export default function Home() {
         "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
       name: "Sarah Chen",
       designation: "Product Manager at TechFlow",
-      src: MsBreew.src
+      src: Gf_1.src
     },
     {
       quote:
         "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
       name: "Michael Rodriguez",
       designation: "CTO at InnovateSphere",
-      src: MsBreew.src
+      src: Gf_2.src
     },
     {
       quote:
         "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
       name: "Emily Watson",
       designation: "Operations Director at CloudScale",
-      src: MsBreew.src
+      src: Gf_3.src
     },
     {
       quote:
         "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
       name: "James Kim",
       designation: "Engineering Lead at DataPro",
-      src: MsBreew.src
+      src: Gf_4.src
     },
     {
       quote:
