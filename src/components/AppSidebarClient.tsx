@@ -35,27 +35,22 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "/dashboard-admin",
+    url: "/dashboard-client",
     icon: Home,
   },
   {
     title: "Orders",
-    url: "/dashboard-admin/orders",
+    url: "/dashboard-client/orders",
     icon: Inbox,
-  },
-  {
-    title: "Users",
-    url: "/dashboard-admin/users",
-    icon: User2,
   },
 ];
 
-export function AppSidebar() {
+export function AppSidebarClient() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-pink text-white">
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-2xl font-bold text-white">Rent a Girlfriend</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

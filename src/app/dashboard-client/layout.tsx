@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebarAdmin } from "@/components/AppSidebarAdmin";
+import { AppSidebarClient } from "@/components/AppSidebarClient";
 
 import {
   Breadcrumb,
@@ -42,7 +42,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <SidebarProvider>
-      <AppSidebarAdmin />
+      <AppSidebarClient />
       <div className="flex flex-col w-screen p-4">
         <div className="flex items-center gap-4">
           <SidebarTrigger />

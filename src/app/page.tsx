@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -9,8 +10,46 @@ import Gf_2 from "@/../public/images/gf-2.png";
 import Gf_3 from "@/../public/images/gf-3.jpeg";
 import Gf_4 from "@/../public/images/gf-4.png";
 import MsBreew from "@/../public/images/msbreew.jpg";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 export default function Home() {
+  const testimonials = [
+    {
+      quote:
+        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+      name: "Sarah Chen",
+      designation: "Product Manager at TechFlow",
+      src: MsBreew.src
+    },
+    {
+      quote:
+        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+      name: "Michael Rodriguez",
+      designation: "CTO at InnovateSphere",
+      src: MsBreew.src
+    },
+    {
+      quote:
+        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+      name: "Emily Watson",
+      designation: "Operations Director at CloudScale",
+      src: MsBreew.src
+    },
+    {
+      quote:
+        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+      name: "James Kim",
+      designation: "Engineering Lead at DataPro",
+      src: MsBreew.src
+    },
+    {
+      quote:
+        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+      name: "Lisa Thompson",
+      designation: "VP of Technology at FutureNet",
+      src: MsBreew.src
+    },
+  ];
   return (
     <>
       <section
@@ -107,27 +146,12 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className="h-full w-screen bg-pink text-white flex flex-col justify-start items-center py-32 gap-12">
+      <section className="h-full w-screen bg-pink text-white flex flex-col justify-start items-center py-20 gap-6">
         <h2 className="text-3xl font-bold text-white relative z-20">
           Member who Have Found Love
         </h2>
         <div className="flex flex-wrap justify-center items-center gap-8">
-          {[Gf_1, Gf_2, Gf_3, Gf_4].map((image, index) => (
-            <div
-              key={index}
-              className="flex flex-col justify-center items-center gap-4"
-            >
-              <Image
-                src={image}
-                alt={`gf-${index + 2}`}
-                className="rounded-full h-40 w-40 object-cover object-center"
-              />
-              <h3 className="text-3xl font-bold text-white relative z-20">
-                Dapet Eimi Fukada
-              </h3>
-              <p className="text-xl text-white">Clara</p>
-            </div>
-          ))}
+          <AnimatedTestimonials testimonials={testimonials} />
         </div>
       </section>
       <section className="h-full w-screen bg-white text-pink flex flex-col justify-start items-center py-32 gap-12">
