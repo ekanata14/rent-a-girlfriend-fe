@@ -1,7 +1,9 @@
 "use client"
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import axios from '@/lib/axiosInstance';
 
 // image
 import HeroImage from "@/../public/images/hero-background.png";
@@ -13,6 +15,7 @@ import MsBreew from "@/../public/images/msbreew.jpg";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 export default function Home() {
+  const [data, setData] = useState(null);
   const testimonials = [
     {
       quote:
@@ -35,7 +38,7 @@ export default function Home() {
       designation: "Operations Director at CloudScale",
       src: Gf_3.src
     },
-    {
+    { 
       quote:
         "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
       name: "James Kim",
@@ -50,6 +53,19 @@ export default function Home() {
       src: MsBreew.src
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/');
+        setData(response.data);
+        alert(response.data.message)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <section
