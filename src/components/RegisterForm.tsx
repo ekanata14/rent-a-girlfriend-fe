@@ -62,11 +62,11 @@ export function RegisterForm() {
 
   return (
     <>
-      <div className="w-full max-w-xl bg-pink p-8 rounded-xl shadow-lg">
+      <div className="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 text-white"
+            className="w-full space-y-6 text-black"
           >
             <FormField
               control={form.control}
@@ -75,11 +75,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Username</FormLabel> */}
                   <FormControl>
-                    <Input
-                      placeholder="Username"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input placeholder="Username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,11 +88,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Email</FormLabel> */}
                   <FormControl>
-                    <Input
-                      placeholder="Email"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input placeholder="Email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,12 +101,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Age</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Age"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="number" placeholder="Age" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,12 +114,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Age</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Text"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="text" placeholder="Text" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -145,12 +127,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Height (cm)</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Height"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="number" placeholder="Height" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -163,12 +140,7 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Mobile Phone</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="tel"
-                      placeholder="Mobile Phone"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="tel" placeholder="Mobile Phone" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -181,22 +153,29 @@ export function RegisterForm() {
                 <FormItem>
                   {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Link href="/dashboard-admin">
-              <Button type="submit" variant={"outlinePink"}>
-                Register
-              </Button>
-            </Link>
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Password</FormLabel> */}
+                  <FormControl>
+                    <Link href="/dashboard-admin">
+                      <Button type="submit" variant={"pink"} className="w-full">
+                        Register
+                      </Button>
+                    </Link>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </form>
         </Form>
       </div>

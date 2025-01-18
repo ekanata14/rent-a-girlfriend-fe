@@ -42,11 +42,11 @@ export function LoginForm() {
 
   return (
     <>
-      <div className="w-full max-w-xl bg-pink p-8 rounded-xl shadow-lg">
+      <div className="w-full max-w-xl p-8 rounded-xl shadow-lg bg-white">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 text-white"
+            className="w-full space-y-6"
           >
             {/* Username Field */}
             <FormField
@@ -56,11 +56,7 @@ export function LoginForm() {
                 <FormItem>
                   {/* <FormLabel>Username</FormLabel> */}
                   <FormControl>
-                    <Input
-                      placeholder="Username"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input placeholder="Username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,22 +71,30 @@ export function LoginForm() {
                 <FormItem>
                   {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      {...field}
-                      className="text-white"
-                    />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Link href="/dashboard-admin">
-              <Button type="submit" variant={"outlinePink"}>
-                Login
-              </Button>
-            </Link>
+            {/* Button Field */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Password</FormLabel> */}
+                  <FormControl>
+                    <Link href="/dashboard-admin">
+                      <Button type="submit" variant={"pink"} className="w-full">
+                        Login
+                      </Button>
+                    </Link>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </form>
         </Form>
       </div>
