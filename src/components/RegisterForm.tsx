@@ -1,9 +1,10 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
+import axios from "@/lib/axiosInstance";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,14 +25,8 @@ const FormSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  age: z
-    .number()
-    .min(18, { message: "You must be at least 18 years old." })
-    .max(100, { message: "Please enter a valid age." }),
-  height: z
-    .number()
-    .min(50, { message: "Height must be at least 50 cm." })
-    .max(250, { message: "Height must be less than 250 cm." }),
+  age: z.string(),
+  height: z.string(),
   gender: z.string(),
   mobile_phone: z.string().regex(/^(\+?\d{1,4}[\s-]?)?\d{10}$/, {
     message: "Please enter a valid mobile phone number.",
@@ -40,24 +35,38 @@ const FormSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters." })
     .max(32, { message: "Password must be less than 32 characters." }),
+  role: z.number(),
 });
 
 export function RegisterForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",
       email: "",
-      age: undefined,
-      height: undefined,
+      age: "",
+      height: "",
       gender: "",
       mobile_phone: "",
       password: "",
+      role: 1,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("Form submitted successfully:", data);
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      console.log(data);
+      const response = await axios.post("/api/register", data);
+      console.log("Registration successful:", response.data);
+      alert("Registration successful!");
+      router.push("/login");
+      // Redirect or handle success
+    } catch (error) {
+      alert(error);
+      console.error("Error during registration:", error);
+      alert("Registration failed. Please try again.");
+    }
   }
 
   return (
@@ -73,7 +82,6 @@ export function RegisterForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Username</FormLabel> */}
                   <FormControl>
                     <Input placeholder="Username" {...field} />
                   </FormControl>
@@ -86,7 +94,6 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Email</FormLabel> */}
                   <FormControl>
                     <Input placeholder="Email" {...field} />
                   </FormControl>
@@ -99,7 +106,6 @@ export function RegisterForm() {
               name="age"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Age</FormLabel> */}
                   <FormControl>
                     <Input type="number" placeholder="Age" {...field} />
                   </FormControl>
@@ -112,9 +118,12 @@ export function RegisterForm() {
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Age</FormLabel> */}
                   <FormControl>
-                    <Input type="text" placeholder="Text" {...field} />
+                    <select {...field} className="w-full p-2 border rounded">
+                      <option value="">Select Gender</option>
+                      <option value={0}>Male</option>
+                      <option value={1}>Female</option>
+                    </select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,7 +134,6 @@ export function RegisterForm() {
               name="height"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Height (cm)</FormLabel> */}
                   <FormControl>
                     <Input type="number" placeholder="Height" {...field} />
                   </FormControl>
@@ -138,7 +146,6 @@ export function RegisterForm() {
               name="mobile_phone"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Mobile Phone</FormLabel> */}
                   <FormControl>
                     <Input type="tel" placeholder="Mobile Phone" {...field} />
                   </FormControl>
@@ -151,7 +158,6 @@ export function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
                     <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
@@ -159,23 +165,9 @@ export function RegisterForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  {/* <FormLabel>Password</FormLabel> */}
-                  <FormControl>
-                    <Link href="/dashboard-admin">
-                      <Button type="submit" variant={"pink"} className="w-full">
-                        Register
-                      </Button>
-                    </Link>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <Button type="submit" variant="pink" className="w-full">
+              Register
+            </Button>
           </form>
         </Form>
       </div>
