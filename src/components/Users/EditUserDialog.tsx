@@ -5,6 +5,7 @@ import axios from "@/lib/axiosInstance";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2"; // Import SweetAlert2
 import {
   Dialog,
   DialogContent,
@@ -93,14 +94,29 @@ export function EditUserDialog({ userId }: { userId: number }) {
       //   formData.append("profile_picture", data.profile_picture);
       // }
 
-      const response = await axios.put(`/api/admin/user`, formData);
+      const response = await axios.post(
+        `/api/admin/user/${userData.id}`,
+        formData
+      );
 
       console.log("User update successful:", response.data);
-      alert("User updated successfully!");
-      router.push("/admin/users");
+      Swal.fire({
+        title: "User updated successfully!",
+        text: "The user has been updated by Admin.",
+        icon: "success",
+        confirmButtonText: "OK",
+        timer: 3000,
+      }).then(() => {
+        window.location.reload();
+      });
     } catch (error) {
       console.error("Error updating user:", error);
-      alert("Update failed. Please try again.");
+      Swal.fire({
+        title: "Update failed",
+        text: "Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   }
 

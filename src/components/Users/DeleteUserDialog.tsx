@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2"; // Import SweetAlert2
 import {
   Dialog,
   DialogContent,
@@ -19,15 +20,26 @@ export function DeleteUserDialog({ userId }: { userId: number }) {
   // Handle user deletion
   const handleDelete = async () => {
     setLoading(true);
-
     try {
-      const response = await axios.delete(`/api/admin/user/${userId}`);
+      const response = await axios.delete(`/api/admin/user/delete/${userId}`);
       console.log("User deleted successfully:", response.data);
-      alert("User deleted successfully!");
-      router.push("/admin/users");
+      Swal.fire({
+        title: "User deleted successfully!",
+        text: "The user has been deleted by Admin.",
+        icon: "success",
+        confirmButtonText: "OK",
+        timer: 3000,
+      }).then(() => {
+        window.location.reload();
+      });
     } catch (error) {
       console.error("Error deleting user:", error);
-      alert("Failed to delete user. Please try again.");
+      Swal.fire({
+        title: "Deletion failed",
+        text: "Failed to delete user. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     } finally {
       setLoading(false);
     }

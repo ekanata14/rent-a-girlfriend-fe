@@ -7,6 +7,7 @@ import CardWithForm from "@/components/CardWithForm";
 import { CreateUserDialog } from "@/components/Users/CreateUserDialog";
 import { EditUserDialog } from "@/components/Users/EditUserDialog";
 import { DeleteUserDialog } from "@/components/Users/DeleteUserDialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import {
   Table,
@@ -20,7 +21,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { User } from "@/interfaces/User";
-import { Skeleton } from "@/components/ui/skeleton";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 function Users() {
   const [data, setData] = useState<User[] | null>(null);
@@ -80,8 +81,9 @@ function Users() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((user, index) => (
-            <TableRow key={user.id}>
+            {data && data.length > 0 ? (
+            data.map((user, index) => (
+              <TableRow key={user.id}>
               <TableCell className="font-medium">{index + 1}</TableCell>
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
@@ -90,12 +92,18 @@ function Users() {
               <TableCell>{user.role === 0 ? "Admin" : "User"}</TableCell>
               <TableCell className="flex gap-4">
                 {/* Action buttons */}
-
                 <EditUserDialog userId={user.id} />
                 <DeleteUserDialog userId={user.id} />
               </TableCell>
+              </TableRow>
+            ))
+            ) : (
+            <TableRow>
+              <TableCell colSpan={7} className="text-center">
+              Data not found
+              </TableCell>
             </TableRow>
-          ))}
+            )}
         </TableBody>
       </Table>
     </div>

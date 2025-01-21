@@ -1,5 +1,12 @@
-import React from "react";
-import CardWithForm from "@/components/CardWithForm";
+"use client"
+import React, { useEffect, useState } from "react";
+import axios from "@/lib/axiosInstance";
+
+// Components
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Interface
+import { Order } from "@/interfaces/Order";
 import {
   Table,
   TableBody,
@@ -11,88 +18,90 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+const Orders = () => {
+  // Calculate the total price
+  // const totalAmount = orders.reduce((acc, order) => acc + order.total_price, 0);
+  const [data, setData] = useState<Order[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); // Loading state
 
-function Orders() {
-  return (
-    <>
-      <div className="space-y-4 w-full">
-        <h1 className="text-4xl font-bold">Orders Data</h1>
-        <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                <TableCell>{invoice.paymentStatus}</TableCell>
-                <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="text-right">
-                  {invoice.totalAmount}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+  // Fetch user data from API
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/order", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+        },
+      });
+      setData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false); // Stop loading when data is fetched
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center space-y-4 w-full h-full">
+        {/* Loading indicator */}
+        <div className="flex items-center space-x-4">
+          <Skeleton className="h-12 w-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+        </div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="space-y-4 w-full">
+      <h1 className="text-4xl font-bold">Orders Data</h1>
+      <Table>
+        <TableCaption>A list of your recent orders.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Order ID</TableHead>
+            <TableHead>User ID</TableHead>
+            <TableHead>Package ID</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-right">Total Price</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+            {data && data.length > 0 ? (
+            data.map((order, index) => (
+              <TableRow key={order.id}>
+              <TableCell className="font-medium">{index + 1}</TableCell>
+              <TableCell>{order.user_id}</TableCell>
+              <TableCell>{order.package_id}</TableCell>
+              <TableCell>{order.status}</TableCell>
+              <TableCell className="text-right">${order.total_price}</TableCell>
+              </TableRow>
+            ))
+            ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center">
+              Data not found
+              </TableCell>
+            </TableRow>
+            )}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={4}>Total</TableCell>
+            {/* <TableCell className="text-right">${totalAmount}</TableCell> */}
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </div>
   );
-}
+};
 
 export default Orders;
