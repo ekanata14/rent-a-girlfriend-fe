@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
+import axios from '@/lib/axiosInstance';
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import axios from '@/lib/axiosInstance';
 
 // image
 import HeroImage from "@/../public/images/hero-background.png";
@@ -57,7 +57,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/');
+        const response = await axios.get('/api/home');
         setData(response.data);
         alert(response.data.message)
       } catch (error) {

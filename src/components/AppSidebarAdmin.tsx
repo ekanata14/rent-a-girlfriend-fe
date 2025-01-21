@@ -59,7 +59,7 @@ export function AppSidebarAdmin() {
       <SidebarContent className="bg-pink text-white">
         <SidebarGroup>
           <SidebarGroupLabel className="text-xl font-bold text-white">
-            Rent a Girlfriend Admin
+            Admin
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
