@@ -46,7 +46,7 @@ export default function DashboardLayout({
       <div className="flex flex-col w-screen p-4">
         <div className="flex items-center gap-4">
           <SidebarTrigger />
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -76,7 +76,7 @@ export default function DashboardLayout({
                 <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </Breadcrumb> */}
         </div>
         <main className="py-4">{children}</main>
       </div>
